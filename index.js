@@ -137,25 +137,30 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
     )
 }
 
+function determineWinner ({player, enemy, timerId}) {
+    clearTimeout(timerId)
+    if (player.health === enemy.health) {
+        document.querySelector('#displayText').innerHTML = "Tie"
+    } else if (player.health > enemy.health) {
+        document.querySelector('#displayText').innerHTML = 'Player 1 wins'
+    } else if (player.health < enemy.health) {
+        document.querySelector('#displayText').innerHTML = 'Player 2 wins'
+    }
+}
+
 //CREATING COUNT DOWN TIMER
-let timer = 11;
+let timer = 61;
+let timerId
 function decreaseTimer (){
+    document.querySelector('#displayText').style.display = "flex"
     if(timer > 0) {
-        setTimeout(decreaseTimer, 1000)
+        timerId = setTimeout(decreaseTimer, 1000)
         timer --
         document.querySelector('#timer').innerHTML = timer
     }
     //ONLY DISPLAYS IF A TIE OCCURS
     if (timer === 0) {
-        document.querySelector('#displayText').style.display = "flex"
-
-        if (player.health === enemy.health) {
-            document.querySelector('#displayText').innerHTML = "Tie"
-        } else if (player.health > enemy.health) {
-            document.querySelector('#displayText').innerHTML = 'Player 1 wins'
-        } else if (enemy.health > player.health) {
-            document.querySelector('#displayText').innerHTML = 'Player 2 wins'
-        }
+        determineWinner({player, enemy, timerId})
     }
 }
 decreaseTimer()
@@ -207,6 +212,10 @@ function animate() {
         enemy.isAttacking = false  //stops crazy multi attack, more accurate hits
         player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%' //shrinking health bar with hits
+    }
+//    END GAME BASED ON HEALTH
+    if (enemy.health <= 0 || player.health <= 0) {
+        determineWinner({player, enemy, timerId})
     }
 }
 
