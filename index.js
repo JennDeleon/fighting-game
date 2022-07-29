@@ -15,9 +15,10 @@ const gravity = 0.7; //gravity speed
 
 //Blueprint for the object before we create it
 class Sprite {
-    constructor({position, velocity}) { //wrapping arguments into an object to make code cleaner/easier as we add more properties onto the constructor
+    constructor({position, velocity, color = 'red'}) { //wrapping arguments into an object to make code cleaner/easier as we add more properties onto the constructor
         this.position = position
         this.velocity = velocity
+        this.width = 50
         this.height = 150;
         this.lastKey
         this.attackBox = {
@@ -25,11 +26,12 @@ class Sprite {
             width: 100,
             height: 50
         }
+        this.color = color
     }
     //drawing sprite
     draw() {
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, 50, this.height)
+        c.fillStyle = this.color
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
 
         //attack box
         c.fillStyle = 'green'
@@ -68,7 +70,7 @@ const enemy = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    }, color: "blue"
 })
 
 enemy.draw()
@@ -98,8 +100,8 @@ function animate() {
     window.requestAnimationFrame(animate) //calling animate, calls function, then calls animate....infinite loop
     c.fillStyle = 'black';  // black background & rectangles
     c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
-    player.update(); //corrects rect back to red
-    enemy.update(); //corrects rect back to red
+    player.update(); //corrects rect back to correct color
+    enemy.update(); //corrects rect back to correct color
 
     player.velocity.x = 0
     enemy.velocity.x = 0
@@ -115,6 +117,9 @@ function animate() {
         enemy.velocity.x = -5
     } else if (keys.ArrowRight.pressed && enemy.lastKey=== 'ArrowRight') {
         enemy.velocity.x = 5
+    }
+    //detect for collision
+    if(player.attackBox.position.x + player.attackBox.width >= enemy.position.x && player.attackBox.position.x <= enemy.position.x + enemy.width){
     }
 }
 
