@@ -137,6 +137,29 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
     )
 }
 
+//CREATING COUNT DOWN TIMER
+let timer = 11;
+function decreaseTimer (){
+    if(timer > 0) {
+        setTimeout(decreaseTimer, 1000)
+        timer --
+        document.querySelector('#timer').innerHTML = timer
+    }
+    //ONLY DISPLAYS IF A TIE OCCURS
+    if (timer === 0) {
+        document.querySelector('#displayText').style.display = "flex"
+
+        if (player.health === enemy.health) {
+            document.querySelector('#displayText').innerHTML = "Tie"
+        } else if (player.health > enemy.health) {
+            document.querySelector('#displayText').innerHTML = 'Player 1 wins'
+        } else if (enemy.health > player.health) {
+            document.querySelector('#displayText').innerHTML = 'Player 2 wins'
+        }
+    }
+}
+decreaseTimer()
+
 
 //Creating animation loop
 function animate() {

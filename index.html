@@ -11,10 +11,12 @@
     <title>Fighting game</title>
 </head>
 <body>
+
 <!-- red container -->
 <div style="
 position: relative;
 display: inline-block">
+
     <!--    smaller red container-->
     <div style="
     position: absolute;
@@ -51,12 +53,19 @@ display: inline-block">
             ></div>
         </div>
 
-        <!--   timer    USING FLEX-SHRINK: 0 MAKES SURE YOUR CHILD ELEMENT WITHIN A PARENT FLEX ELEMENT DOSENT SHRINK-->
-        <div style="
+        <!--   timer    -->
+        <div id="timer" style="
         background-color: red;
         width: 100px;
         height: 100px;
-        flex-shrink: 0;"></div>
+        /*USING FLEX-SHRINK: 0 MAKES SURE YOUR CHILD ELEMENT WITHIN A PARENT FLEX ELEMENT DOSENT SHRINK*/
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+">
+            10
+        </div>
 
         <!--    enemy health    -->
         <div style="
@@ -80,8 +89,18 @@ display: inline-block">
         left: 0"
             ></div>
         </div>
-    </div>
     <div></div>
+    </div>
+    <div id= "displayText" style="
+    position: absolute;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    top: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;">
+        Tie</div>
     <canvas></canvas>
 </div>
 <script src="index.js"></script>
