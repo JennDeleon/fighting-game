@@ -5,7 +5,20 @@
     <title>Fighting game</title>
 </head>
 <body>
-<canvas></canvas>
+<!-- red container -->
+<div style="position: relative;">
+    <!--    smaller red container-->
+    <div style="position: absolute; display: flex; width: 100%; align-items: center;">
+        <!--  player health  -->
+        <div style="background-color: yellow; height: 30px; width: 100%"></div>
+        <!--   timer    USING FLEX-SHRINK: 0 MAKES SURE YOUR CHILD ELEMENT WITHIN A PARENT FLEX ELEMENT DOSENT SHRINK-->
+        <div style="background-color: red; width: 100px; height: 100px; flex-shrink: 0;"></div>
+        <!--    enemy health    -->
+        <div style="background-color: yellow; height: 30px; width: 100%"></div>
+
+    </div>
+    <canvas></canvas>
+</div>
 <script src="index.js"></script>
 </body>
 </html>
