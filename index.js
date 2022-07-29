@@ -32,6 +32,7 @@ class Sprite {
         }
         this.color = color
         this.isAttacking
+        this.health = 100
     }
     //drawing sprite
     draw() {
@@ -169,7 +170,8 @@ function animate() {
         player.isAttacking
     ){
         player.isAttacking = false  //stops crazy multi attack, more accurate hits
-        document.querySelector('#enemyHealth').style.width = '20%'  //shrinking health bar with hits
+        enemy.health -= 20  //subtracting from health bar
+        document.querySelector('#enemyHealth').style.width = enemy.health + '%' //shrinking health bar with hits
     }
     // enemy hits
     if(
