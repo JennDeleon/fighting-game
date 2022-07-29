@@ -166,6 +166,17 @@ function animate() {
         player.isAttacking = false  //stops crazy multi attack, more accurate hits
         console.log("hit")
     }
+    // enemy hits
+    if(
+        rectangularCollision({
+            rectangle1: enemy,
+            rectangle2: player
+        }) &&
+        enemy.isAttacking
+    ){
+        enemy.isAttacking = false  //stops crazy multi attack, more accurate hits
+        console.log("enemy hit")
+    }
 }
 
 
@@ -200,6 +211,9 @@ window.addEventListener('keydown', (event) => {
             break;
         case 'ArrowUp':
             enemy.velocity.y = -20  //controls height of players jump
+            break;
+        case "ArrowDown":
+            enemy.isAttacking = true
             break
     }
 })
