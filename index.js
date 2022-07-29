@@ -81,7 +81,7 @@ const keys = {
         pressed: false
     }
 }
-let lastKey
+
 
 
 //Creating animation loop
@@ -96,9 +96,9 @@ function animate() {
     enemy.velocity.x = 0
 
     //player movement
-    if (keys.a.pressed && lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
+    if (keys.a.pressed && player.lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
         player.velocity.x = -1
-    } else if (keys.d.pressed && lastKey=== 'd') {
+    } else if (keys.d.pressed && player.lastKey=== 'd') {
         player.velocity.x = 1
     }
     //enemy movement
@@ -117,11 +117,11 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':
             keys.d.pressed = true  //when press 'd', player moves 1 px right along the x axis
-            lastKey = 'd'
+            player.lastKey = 'd'
             break;
         case 'a':
             keys.a.pressed = true
-            lastKey = 'a'
+            player.lastKey = 'a'
             break;
         case 'w':
             keys.w.pressed = true
