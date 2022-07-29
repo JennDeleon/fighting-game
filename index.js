@@ -11,7 +11,7 @@ canvas.height = 576;
 //Canvas background
 c.fillRect(0, 0, 1024, 576);
 
-const gravity = 0.2; //gravity speed
+const gravity = 0.7; //gravity speed
 
 //Blueprint for the object before we create it
 class Sprite {
@@ -97,15 +97,15 @@ function animate() {
 
     //player movement
     if (keys.a.pressed && player.lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
-        player.velocity.x = -1
+        player.velocity.x = -5
     } else if (keys.d.pressed && player.lastKey=== 'd') {
-        player.velocity.x = 1
+        player.velocity.x = 5
     }
     //enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {  //making sure movement continues even if a different key is lifted up
-        enemy.velocity.x = -1
+        enemy.velocity.x = -5
     } else if (keys.ArrowRight.pressed && enemy.lastKey=== 'ArrowRight') {
-        enemy.velocity.x = 1
+        enemy.velocity.x = 5
     }
 }
 
@@ -116,7 +116,7 @@ animate();
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':
-            keys.d.pressed = true  //when press 'd', player moves 1 px right along the x axis
+            keys.d.pressed = true  //when press 'd', player moves 5px right along the x axis
             player.lastKey = 'd'
             break;
         case 'a':
@@ -125,7 +125,7 @@ window.addEventListener('keydown', (event) => {
             break;
         case 'w':
             keys.w.pressed = true
-            player.velocity.y = -10  //controls height of players jump
+            player.velocity.y = -20  //controls height of players jump
             break
 
         case 'ArrowRight':
@@ -137,7 +137,7 @@ window.addEventListener('keydown', (event) => {
             enemy.lastKey = "ArrowLeft"
             break;
         case 'ArrowUp':
-            enemy.velocity.y = -10  //controls height of players jump
+            enemy.velocity.y = -20  //controls height of players jump
             break
     }
 })
