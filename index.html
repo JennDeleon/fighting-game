@@ -25,9 +25,31 @@ display: inline-block">
 
         <!--  player health  -->
         <div style="
-        background-color: yellow;
+        position: relative;
         height: 30px;
-        width: 100%"></div>
+        width: 100%;
+        display: flex;
+        /* we want all children elements aligned to the right */
+        justify-content: flex-end;
+">
+            <div
+                    style="
+                    background-color: yellow;
+                    height: 30px;
+                    width: 100%;"
+            ></div>
+
+            <div id="playerHealth"
+                 style="
+        position: absolute;
+        /* OVERLAYING BLUE TO SHOW COLOR DIFFERENCE OF HITS AND ORIGINAL STARTING HEALTH*/
+        background: blue;
+        top: 0;
+        right: 0;
+        bottom: 0;
+       width: 100%;"
+            ></div>
+        </div>
 
         <!--   timer    USING FLEX-SHRINK: 0 MAKES SURE YOUR CHILD ELEMENT WITHIN A PARENT FLEX ELEMENT DOSENT SHRINK-->
         <div style="
@@ -47,16 +69,17 @@ display: inline-block">
                     height: 30px;"
             ></div>
 
-        <div id="enemyHealth"
-             style="
+            <div id="enemyHealth"
+                 style="
         position: absolute;
         /* OVERLAYING BLUE TO SHOW COLOR DIFFERENCE OF HITS AND ORIGINAL STARTING HEALTH*/
         background: blue;
         top: 0;
         right: 0;
         bottom: 0;
-        left: 0"></div>
-    </div>
+        left: 0"
+            ></div>
+        </div>
     </div>
     <div></div>
     <canvas></canvas>
