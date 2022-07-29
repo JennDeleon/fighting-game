@@ -63,21 +63,6 @@ const enemy = new Sprite({
 
 enemy.draw()
 
-//Creating animation loop
-function animate() {
-    window.requestAnimationFrame(animate) //calling animate, calls function, then calls animate....infinite loop
-    c.fillStyle = 'black';  // black background & rectangles
-    c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
-    player.update(); //corrects rect back to red
-    enemy.update(); //corrects rect back to red
-
-    if (keys.a.pressed) {  //making sure movement continues even if a different key is lifted up
-        player.velocity.x = -1
-    } else if (keys.d.pressed) {
-        player.velocity.x = 1
-    }
-}
-
 const keys = {
     a: {
         pressed: false
@@ -86,26 +71,51 @@ const keys = {
         pressed: false
     }
 }
+let lastKey
+
+
+//Creating animation loop
+function animate() {
+    window.requestAnimationFrame(animate) //calling animate, calls function, then calls animate....infinite loop
+    c.fillStyle = 'black';  // black background & rectangles
+    c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
+    player.update(); //corrects rect back to red
+    enemy.update(); //corrects rect back to red
+
+    player.velocity.x = 0
+
+    if (keys.a.pressed && lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
+        player.velocity.x = -1
+    } else if (keys.d.pressed && lastKey=== 'd') {
+        player.velocity.x = 1
+    }
+}
+
+
 animate();
 
 //adding events to key presses
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':
-            player.velocity.x = 1  //when press 'd', player moves 1 px right along the x axis
+            keys.d.pressed = true  //when press 'd', player moves 1 px right along the x axis
+            lastKey = 'd'
             break;
-        case 'a':               //when press 'd', player moves 1 px left along the x axis
-            player.velocity.x = -1
+        case 'a':
+            keys.a.pressed = true
+            lastKey = 'a'
+            break
+
     }
 })
 
 window.addEventListener('keyup', (event) => {
     switch (event.key) {
         case 'd':
-            player.velocity.x = 0 //stop players movement
+            keys.d.pressed = false //stop players movement
             break
         case 'a':
-            player.velocity.x = 0 //stop players movement
+            keys.a.pressed = false
             break
     }
 })
