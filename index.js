@@ -43,7 +43,7 @@ class Sprite {
             c.fillStyle = 'green'
             c.fillRect(
                 this.attackBox.position.x,
-                this.position.y,
+                this.attackBox.position.y,
                 this.attackBox.width,
                 this.attackBox.height
             )
@@ -53,8 +53,10 @@ class Sprite {
         this.draw()
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y   //equal to the velocity we are passing onto players
+
         if (this.position.y + this.height + this.velocity.y >= canvas.height) { //only allowing rectangle to hit height of canvas
             this.velocity.y = 0;
         } else this.velocity.y += gravity //stops player from moving below canvas
@@ -124,10 +126,13 @@ const keys = {
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
-    player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
-    player.attackBox.position.x <= enemy.position.x + enemy.width &&
-    player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
-    player.attackBox.position.y <= enemy.position.y + enemy.height
+    rectangle1.attackBox.position.x + rectangle1.attackBox.width >=
+    rectangle2.position.x &&
+    rectangle1.attackBox.position.x <=
+    rectangle2.position.x + rectangle2.width &&
+    rectangle1.attackBox.position.y + rectangle1.attackBox.height >=
+    rectangle2.position.y &&
+    rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
     )
 }
 
@@ -179,7 +184,6 @@ function animate() {
     }
 }
 
-
 animate();
 
 //adding events to key presses
@@ -226,11 +230,10 @@ window.addEventListener('keyup', (event) => {
         case 'a':
             keys.a.pressed = false
             break
-        case 'w':
-            keys.w.pressed = false
-            break
+    }
 
         //enemy keys
+    switch(event.key) {
         case 'ArrowRight':
             keys.ArrowRight.pressed = false
             break
