@@ -19,6 +19,7 @@ class Sprite {
         this.position = position
         this.velocity = velocity
         this.height = 150;
+        this.lastKey;
     }
     //drawing sprite
     draw() {
@@ -69,6 +70,15 @@ const keys = {
     },
     d: {
         pressed: false
+    },
+    w: {
+        pressed: false
+    },
+    ArrowRight: {
+        pressed: false
+    },
+    ArrowLeft: {
+        pressed: false
     }
 }
 let lastKey
@@ -83,11 +93,19 @@ function animate() {
     enemy.update(); //corrects rect back to red
 
     player.velocity.x = 0
+    enemy.velocity.x = 0
 
+    //player movement
     if (keys.a.pressed && lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
         player.velocity.x = -1
     } else if (keys.d.pressed && lastKey=== 'd') {
         player.velocity.x = 1
+    }
+    //enemy movement
+    if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {  //making sure movement continues even if a different key is lifted up
+        enemy.velocity.x = -1
+    } else if (keys.ArrowRight.pressed && enemy.lastKey=== 'ArrowRight') {
+        enemy.velocity.x = 1
     }
 }
 
@@ -104,8 +122,23 @@ window.addEventListener('keydown', (event) => {
         case 'a':
             keys.a.pressed = true
             lastKey = 'a'
+            break;
+        case 'w':
+            keys.w.pressed = true
+            player.velocity.y = -10  //controls height of players jump
             break
 
+        case 'ArrowRight':
+            keys.ArrowRight.pressed = true
+            enemy.lastKey = "ArrowRight"
+            break;
+        case 'ArrowLeft':
+            keys.ArrowLeft.pressed = true
+            enemy.lastKey = "ArrowLeft"
+            break;
+        case 'ArrowUp':
+            enemy.velocity.y = -10  //controls height of players jump
+            break
     }
 })
 
@@ -116,6 +149,17 @@ window.addEventListener('keyup', (event) => {
             break
         case 'a':
             keys.a.pressed = false
+            break
+        case 'w':
+            keys.w.pressed = false
+            break
+
+        //enemy keys
+        case 'ArrowRight':
+            keys.ArrowRight.pressed = false
+            break
+        case 'ArrowLeft':
+            keys.ArrowLeft.pressed = false
             break
     }
 })
