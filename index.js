@@ -11,7 +11,7 @@ canvas.height = 576;
 //Canvas background
 c.fillRect(0, 0, 1024, 576);
 
-const gravity = 0.2 //gravity speed
+const gravity = 0.2; //gravity speed
 
 //Blueprint for the object before we create it
 class Sprite {
@@ -27,11 +27,11 @@ class Sprite {
     }
     update() {
         this.draw()
-        this.velocity.y += gravity
+        this.position.x += this.velocity.x;
         this.position.y += this.velocity.y   //equal to the velocity we are passing onto players
         if (this.position.y + this.height + this.velocity.y >= canvas.height) { //only allowing rectangle to hit height of canvas
-            this.velocity.y = 0; //stop player from hitting below canvas
-        }
+            this.velocity.y = 0;
+        } else this.velocity.y += gravity //stops player from moving below canvas
     }
 }
 
@@ -45,7 +45,7 @@ const player = new Sprite({
 },
     velocity: {
         x: 0,
-        y: 10
+        y: 0
     }
 })
 
@@ -70,5 +70,42 @@ function animate() {
     c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
     player.update(); //corrects rect back to red
     enemy.update(); //corrects rect back to red
+
+    if (keys.a.pressed) {  //making sure movement continues even if a different key is lifted up
+        player.velocity.x = -1
+    } else if (keys.d.pressed) {
+        player.velocity.x = 1
+    }
+}
+
+const keys = {
+    a: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
 }
 animate();
+
+//adding events to key presses
+window.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'd':
+            player.velocity.x = 1  //when press 'd', player moves 1 px right along the x axis
+            break;
+        case 'a':               //when press 'd', player moves 1 px left along the x axis
+            player.velocity.x = -1
+    }
+})
+
+window.addEventListener('keyup', (event) => {
+    switch (event.key) {
+        case 'd':
+            player.velocity.x = 0 //stop players movement
+            break
+        case 'a':
+            player.velocity.x = 0 //stop players movement
+            break
+    }
+})
