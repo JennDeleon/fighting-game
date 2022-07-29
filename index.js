@@ -169,7 +169,7 @@ function animate() {
         player.isAttacking
     ){
         player.isAttacking = false  //stops crazy multi attack, more accurate hits
-        console.log("hit")
+        document.querySelector('#enemyHealth').style.width = '20%'  //shrinking health bar with hits
     }
     // enemy hits
     if(

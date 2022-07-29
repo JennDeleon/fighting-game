@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        * {
+            /* MAKES SURE PADDING DOSENT MESS UP OVERALL WIDTH OF ELEMENTS*/
+            box-sizing: border-box;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Fighting game</title>
 </head>
@@ -15,26 +21,44 @@ display: inline-block">
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 20px;
-">
+    padding: 20px;">
+
         <!--  player health  -->
         <div style="
         background-color: yellow;
         height: 30px;
         width: 100%"></div>
+
         <!--   timer    USING FLEX-SHRINK: 0 MAKES SURE YOUR CHILD ELEMENT WITHIN A PARENT FLEX ELEMENT DOSENT SHRINK-->
         <div style="
         background-color: red;
         width: 100px;
         height: 100px;
         flex-shrink: 0;"></div>
+
         <!--    enemy health    -->
         <div style="
-        background-color: yellow;
+        position: relative;
         height: 30px;
-        width: 100%"></div>
+        width: 100%">
+            <div
+                    style="
+                    background-color: yellow;
+                    height: 30px;"
+            ></div>
 
+        <div id="enemyHealth"
+             style="
+        position: absolute;
+        /* OVERLAYING BLUE TO SHOW COLOR DIFFERENCE OF HITS AND ORIGINAL STARTING HEALTH*/
+        background: blue;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0"></div>
     </div>
+    </div>
+    <div></div>
     <canvas></canvas>
 </div>
 <script src="index.js"></script>
