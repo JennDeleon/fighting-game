@@ -23,6 +23,18 @@ const background = new Sprite ({
     imageSrc: './img/background.jpg'
 })
 
+//shop background
+const shop = new Sprite ({
+    position: {
+        x: 410,
+        y: 235
+        //shop position
+    },
+    imageSrc: './img/shop.png',
+    scale: 2,  //making shop size bigger without effecting background image size
+    framesMax: 6    //cropping shop Img
+})
+
 
 //creating player and starting position
 const player = new Fighter({
@@ -85,6 +97,7 @@ function animate() {
     c.fillStyle = 'black';  // black background & rectangles
     c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
     background.update(); //place before player & enemy bc we want this drawn first, not on top of characters
+    shop.update();
     player.update(); //corrects rect back to correct color
     enemy.update(); //corrects rect back to correct color
 
