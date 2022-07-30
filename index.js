@@ -13,6 +13,15 @@ c.fillRect(0, 0, 1024, 576);
 
 const gravity = 0.7; //gravity speed
 
+//implementing Sprite class, one argument & new properties
+const background = new Sprite ({
+    position: {
+        x: 0,
+        y: 0
+
+    },
+    imageSrc: './img/background.jpg'
+})
 
 
 //creating player and starting position
@@ -113,6 +122,7 @@ function animate() {
     window.requestAnimationFrame(animate) //calling animate, calls function, then calls animate....infinite loop
     c.fillStyle = 'black';  // black background & rectangles
     c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
+    background.update(); //place before player & enemy bc we want this drawn first, not on top of characters
     player.update(); //corrects rect back to correct color
     enemy.update(); //corrects rect back to correct color
 
@@ -122,7 +132,7 @@ function animate() {
     //player movement
     if (keys.a.pressed && player.lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
         player.velocity.x = -5
-    } else if (keys.d.pressed && player.lastKey=== 'd') {
+    } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
     }
     //enemy movement

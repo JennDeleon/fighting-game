@@ -1,13 +1,17 @@
 //Blueprint for the object before we create it
 class Sprite {
-    constructor({position}) {
-        this.position = position
-        this.width = 50
+    constructor({position, imageSrc}) {
+        this.position = position;
+        this.width = 50;
         this.height = 150;
+        this.image = new Image()  //native JS API object called Image()...creates a html image within a JS property
+        this.image.src = imageSrc
     }
 
     //drawing sprite
     draw() {
+        //Canvas function, 1st argument is HTML image element. 2nd x cord & 3rd y cord
+        c.drawImage(this.image, this.position.x, this.position.y)
     }
 
     update() {
