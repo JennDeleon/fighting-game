@@ -20,14 +20,14 @@ const background = new Sprite ({
         y: 0
 
     },
-    imageSrc: './img/background2.jpg'
+    imageSrc: './img/background.jpg'
 })
 
 //shop background
 const shop = new Sprite ({
     position: {
-        x: 410,
-        y: 235
+        x: 350,
+        y: 150
         //shop position
     },
     imageSrc: './img/shop.png',
