@@ -49,7 +49,8 @@ const player = new Fighter({
     offset: {
         x:0,
         y:0
-    }
+    },
+    imageSrc: 'img/fighter/Idle.png'
 })
 
 //creating enemy

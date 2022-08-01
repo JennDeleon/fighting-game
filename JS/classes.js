@@ -32,6 +32,7 @@ class Sprite {
         )
     }
 
+
     update() {
         this.draw()
         this.framesElapsed++
@@ -44,9 +45,23 @@ class Sprite {
         }
     }
 }
-    class Fighter {
-    constructor({position, velocity, color = 'red', offset}) { //wrapping arguments into an object to make code cleaner/easier as we add more properties onto the constructor
-        this.position = position
+    class Fighter extends Sprite{
+    constructor({position,         //wrapping arguments into an object to make code cleaner/easier as we add more properties onto the constructor
+
+                    velocity,
+                    color = 'red',
+                    offset,
+                    imageSrc, scale = 1,
+                    framesMax = 1
+    }) {
+        super({  // super()calls the constructor of the parent
+            position,
+            imageSrc,
+            scale,
+            framesMax,
+
+        })
+
         this.velocity = velocity
         this.width = 50
         this.height = 150;
@@ -63,23 +78,11 @@ class Sprite {
         this.color = color
         this.isAttacking
         this.health = 100
+        this.framesCurrent = 0
+        this.framesElapsed = 0 //how many frames have we elapsed over, increases as game goes on
+        this.framesHold = 10 //how many frames we should go though before  we change frames current
     }
-    //drawing sprite
-    draw() {
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
 
-        //attack box
-        if (this.isAttacking) {
-            c.fillStyle = 'green'
-            c.fillRect(
-                this.attackBox.position.x,
-                this.attackBox.position.y,
-                this.attackBox.width,
-                this.attackBox.height
-            )
-        }
-    }
     update() {
         this.draw()
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
