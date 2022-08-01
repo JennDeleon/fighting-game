@@ -50,7 +50,24 @@ const player = new Fighter({
         x:0,
         y:0
     },
-    imageSrc: 'img/fighter/Idle.png'
+    imageSrc: 'img/fighter/Idle.png',
+    framesMax: 8,  //Idle image has 8 frames
+    scale: 2.5,   //making fighter bigger
+    offset: {
+        x: 125,
+        y: 190
+    },
+    sprites: {
+        idle: {
+            imageSrc : 'img/fighter/Idle.png',
+            framesMax: 8,
+        },
+        run: {
+            imageSrc : 'img/fighter/Run.png',
+            framesMax: 8,
+            image: new Image()
+        }
+    }
 })
 
 //creating enemy
@@ -99,8 +116,8 @@ function animate() {
     c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
     background.update(); //place before player & enemy bc we want this drawn first, not on top of characters
     shop.update();
-    player.update(); //corrects rect back to correct color
-    enemy.update(); //corrects rect back to correct color
+    player.update(); //corrects rect back to starting frame
+    // enemy.update(); //corrects rect back to starting frame
 
     player.velocity.x = 0
     enemy.velocity.x = 0
@@ -108,6 +125,7 @@ function animate() {
     //player movement
     if (keys.a.pressed && player.lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
         player.velocity.x = -5
+        player.image = player.sprites.run.image
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
     }
