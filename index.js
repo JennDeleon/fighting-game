@@ -72,6 +72,11 @@ const player = new Fighter({
             framesMax: 2,   //this image only has 2 frames
             image: new Image()
         },
+        fall: {
+            imageSrc : 'img/fighter/Fall.png',
+            framesMax: 2,
+            // image: new Image()
+        },
         // attack: {
         //     imageSrc : 'img/fighter/Jump.png',
         //     framesMax: 8,
@@ -142,9 +147,12 @@ function animate() {
     }  else {
         player.switchSprite('idle')
     }
+
+    //jumping
     if (player.velocity.y < 0) {
         player.switchSprite('jump')
-
+    } else if (player.velocity.y > 0) {
+        player.switchSprite('fall')
     }
 
     //enemy movement

@@ -103,9 +103,12 @@ class Sprite {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y   //equal to the velocity we are passing onto players
 
-        if (this.position.y + this.height + this.velocity.y >= canvas.height -55) { //only allowing rectangle to hit height of canvas
+        //gravity function
+        if (this.position.y + this.height + this.velocity.y >= canvas.height -96) { //only allowing rectangle to hit height of canvas
             this.velocity.y = 0;
+            this.position.y = 330
         } else this.velocity.y += gravity //stops player from moving below canvas
+    // console.log(this.position.y)
     }
 
     attack(){
@@ -137,7 +140,14 @@ class Sprite {
                     this.image = this.sprites.jump.image
                     this.framesMax = this.sprites.jump.framesMax
                     this.framesCurrent = 0
+                }
+                break;
 
+            case 'fall':
+                if(this.image !== this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image
+                    this.framesMax = this.sprites.fall.framesMax
+                    this.framesCurrent = 0
                 }
                 break;
         }
