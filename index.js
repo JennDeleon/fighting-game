@@ -66,7 +66,17 @@ const player = new Fighter({
             imageSrc : 'img/fighter/Run.png',
             framesMax: 8,
             image: new Image()
-        }
+        },
+        jump: {
+            imageSrc : 'img/fighter/Jump.png',
+            framesMax: 2,   //this image only has 2 frames
+            image: new Image()
+        },
+        // attack: {
+        //     imageSrc : 'img/fighter/Jump.png',
+        //     framesMax: 8,
+        //     image: new Image()
+        // },
     }
 })
 
@@ -123,12 +133,18 @@ function animate() {
     enemy.velocity.x = 0
 
     //player movement
+    player.switchSprite('idle')
     if (keys.a.pressed && player.lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
         player.velocity.x = -5
-        player.image = player.sprites.run.image
+        player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
+        player.switchSprite('run')    //making sprite into running animation
     }
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump')
+    }
+
     //enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {  //making sure movement continues even if a different key is lifted up
         enemy.velocity.x = -5
