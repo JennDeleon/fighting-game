@@ -50,6 +50,7 @@ const player = new Fighter({
         x:0,
         y:0
     },
+    //start of sprite properties
     imageSrc: 'img/fighter/Idle.png',
     framesMax: 8,  //Idle image has 8 frames
     scale: 2.5,   //making fighter bigger
@@ -79,7 +80,7 @@ const player = new Fighter({
         attack1: {
             imageSrc : 'img/fighter/Attack1.png',
             framesMax: 6,
-        },
+        }
     }
 })
 
@@ -96,6 +97,38 @@ const enemy = new Fighter({
     offset: {
         x: -50,
         y:0
+    },
+    //start of sprite properties
+    imageSrc: 'img/fighter/Idle.png',
+    framesMax: 8,  //Idle image has 8 frames
+    scale: 2.5,   //making fighter bigger
+    offset: {
+        x: 125,
+        y: 190
+    },
+    sprites: {
+        idle: {
+            imageSrc: 'img/fighter/Idle.png',
+            framesMax: 8,
+        },
+        run: {
+            imageSrc: 'img/fighter/Run.png',
+            framesMax: 8,
+            image: new Image()
+        },
+        jump: {
+            imageSrc: 'img/fighter/Jump.png',
+            framesMax: 2,   //this image only has 2 frames
+            image: new Image()
+        },
+        fall: {
+            imageSrc: 'img/fighter/Fall.png',
+            framesMax: 2,
+        },
+        attack1: {
+            imageSrc: 'img/fighter/Attack1.png',
+            framesMax: 6,
+        }
     }
 })
 
