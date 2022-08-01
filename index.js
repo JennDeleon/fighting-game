@@ -133,16 +133,18 @@ function animate() {
     enemy.velocity.x = 0
 
     //player movement
-    player.switchSprite('idle')
     if (keys.a.pressed && player.lastKey === 'a') {  //making sure movement continues even if a different key is lifted up
         player.velocity.x = -5
         player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
         player.switchSprite('run')    //making sprite into running animation
+    }  else {
+        player.switchSprite('idle')
     }
     if (player.velocity.y < 0) {
         player.switchSprite('jump')
+
     }
 
     //enemy movement
