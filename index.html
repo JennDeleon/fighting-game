@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
             /* MAKES SURE PADDING DOSENT MESS UP OVERALL WIDTH OF ELEMENTS*/
             box-sizing: border-box;
+            font-family: 'VT323', monospace;
+            font-size: xxx-large;
+            text-shadow: 2px 2px grey;
         }
     </style>
     <meta charset="UTF-8">
@@ -33,36 +39,41 @@ display: inline-block">
         display: flex;
         /* we want all children elements aligned to the right */
         justify-content: flex-end;
+        border-top: 4px  solid #c2d5e6;
+        border-left: 4px  solid #c2d5e6;
+        border-bottom: 4px  solid #c2d5e6;
+
 ">
             <div
                     style="
-                    background-color: yellow;
-                    height: 30px;
+                    background-color: red;
                     width: 100%;"
             ></div>
 
-            <div id="playerHealth"
-                 style="
-        position: absolute;
-        /* OVERLAYING BLUE TO SHOW COLOR DIFFERENCE OF HITS AND ORIGINAL STARTING HEALTH*/
-        background: blue;
+            <div id="playerHealth" style="
+        position: absolute;  /* OVERLAYING BLUE TO SHOW COLOR DIFFERENCE OF HITS AND ORIGINAL STARTING HEALTH*/
+        background: #365873;
         top: 0;
         right: 0;
         bottom: 0;
-       width: 100%;"
-            ></div>
+        width: 100%;
+">
+
+            </div>
         </div>
 
         <!--   timer    -->
         <div id="timer" style="
-        background-color: red;
+        background-color: #a64d6e;
         width: 100px;
-        height: 100px;
+        height: 50px;
         /*USING FLEX-SHRINK: 0 MAKES SURE YOUR CHILD ELEMENT WITHIN A PARENT FLEX ELEMENT DOSENT SHRINK*/
         flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        color: white;
+        border: 4px solid #c2d5e6;
 ">
             10
         </div>
@@ -70,11 +81,15 @@ display: inline-block">
         <!--    enemy health    -->
         <div style="
         position: relative;
-        height: 30px;
-        width: 100%">
+        width: 100%;
+        border-top: 4px  solid #c2d5e6;
+        border-bottom: 4px  solid #c2d5e6;
+        border-right: 4px  solid #c2d5e6;
+
+">
             <div
                     style="
-                    background-color: yellow;
+                    background-color: red;
                     height: 30px;"
             ></div>
 
@@ -82,16 +97,16 @@ display: inline-block">
                  style="
         position: absolute;
         /* OVERLAYING BLUE TO SHOW COLOR DIFFERENCE OF HITS AND ORIGINAL STARTING HEALTH*/
-        background: blue;
+        background: #365873;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0"
             ></div>
         </div>
-    <div></div>
+        <div></div>
     </div>
-    <div id= "displayText" style="
+    <div id="displayText" style="
     position: absolute;
     color: white;
     align-items: center;
@@ -100,7 +115,8 @@ display: inline-block">
     bottom: 0;
     left: 0;
     display: none;">
-        Tie</div>
+        Tie
+    </div>
     <canvas></canvas>
 </div>
 <script src="JS/utils.js"></script>
