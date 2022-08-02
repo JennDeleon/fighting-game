@@ -88,6 +88,7 @@ class Sprite {
         this.framesElapsed = 0 //how many frames have we elapsed over, increases as game goes on
         this.framesHold = 10 //how many frames we should go though before  we change frames current
         this.sprites = sprites
+        this.dead = false
 
         for (const sprite in this.sprites) {  //looping through each object in sprites
             sprites[sprite].image = new Image()
@@ -98,7 +99,7 @@ class Sprite {
 
     update() {
         this.draw()
-        this.animateFrames()
+        if(!this.dead) this.animateFrames()
 
         //attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
@@ -130,20 +131,33 @@ class Sprite {
     }
 
     takeHit() {
-        this.sprites.takeHit()
+
         this.health -= 20
+
+        if (this.health <= 0) {
+            this.switchSprite('death')
+        } else this.switchSprite('takeHit')
     }
 
     switchSprite(sprite) {
+        if (
+            this.image === this.sprites.death.image)
+        {
+            if (this.framesCurrent === this.sprites.death.framesMax - 1)
+                this.dead = true
+            return;
+        }
+
         //overriding all other animations with the attack animation
         if (this.image === this.sprites.attack1.image &&        //if our image is the attack image
-            this.framesCurrent < this.sprites.attack1.framesMax - 1) //and our current frame is > the frames max of the actual sprite sheet
-        return                                                       //then return and dont call the following code
+            this.framesCurrent < this.sprites.attack1.framesMax - 1 //and our current frame is > the frames max of the actual sprite sheet
+        )
+            return                                                       //then return and dont call the following code
 
         //overriding when fighter gets hit
         if(
-            this.image === this.sprites.takeHit().image &&
-            this.framesCurrent < this.sprites.takeHit().framesMax -1)
+            this.image === this.sprites.takeHit.image &&
+            this.framesCurrent < this.sprites.takeHit.framesMax -1)
             return;
 
         switch (sprite) {
@@ -190,6 +204,14 @@ class Sprite {
                 if(this.image !== this.sprites.takeHit.image) {
                     this.image = this.sprites.takeHit.image
                     this.framesMax = this.sprites.takeHit.framesMax
+                    this.framesCurrent = 0
+                }
+                break;
+
+            case 'death':
+                if(this.image !== this.sprites.death.image) {
+                    this.image = this.sprites.death.image
+                    this.framesMax = this.sprites.death.framesMax
                     this.framesCurrent = 0
                 }
                 break;
