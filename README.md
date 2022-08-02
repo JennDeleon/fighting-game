@@ -1,2 +1,5 @@
 # fighting-game
-making a fighting game using JS, CSS, and HTML
+Fighting game using JS, CSS, and HTML
+
+See Deployed site:
+https://jennifer-deleon-fightinggame.netlify.app/
