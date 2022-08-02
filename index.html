@@ -9,8 +9,17 @@
             /* MAKES SURE PADDING DOSENT MESS UP OVERALL WIDTH OF ELEMENTS*/
             box-sizing: border-box;
             font-family: 'VT323', monospace;
-            font-size: xxx-large;
-            text-shadow: 2px 2px grey;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        /* Create two equal columns that sits next to each other */
+        .column {
+            flex: 50%;
+            padding: 10px;
+            height:150px; /* Should be removed. Only for demonstration */
         }
     </style>
     <meta charset="UTF-8">
@@ -74,6 +83,8 @@ display: inline-block">
         justify-content: center;
         color: white;
         border: 4px solid #c2d5e6;
+        font-size: xxx-large;
+        text-shadow: 2px 2px grey;
 ">
             10
         </div>
@@ -107,8 +118,10 @@ display: inline-block">
         <div></div>
     </div>
     <div id="displayText" style="
+    font-size: xxx-large;
+    text-shadow: 2px 2px grey;
     position: absolute;
-    color: white;
+    color: yellow;
     align-items: center;
     justify-content: center;
     top: 0; right: 0;
@@ -118,6 +131,18 @@ display: inline-block">
         Tie
     </div>
     <canvas></canvas>
+
+    <div class="row">
+        <div class="column" style="background-color:#365873; text-align: center; font-size: larger">
+            <h2>Player One</h2>
+            <p> use keys: "W-A-D and Space for attack</p>
+        </div>
+        <div class="column" style="background-color:#70879a; text-align: center; font-size: larger">
+            <h2>Player 2</h2>
+            <p> use UP-LEFT-RIGHT and Down for attack</p>
+        </div>
+    </div>
+
 </div>
 <script src="JS/utils.js"></script>
 <script src="JS/classes.js"></script>
