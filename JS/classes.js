@@ -57,7 +57,8 @@ class Sprite {
                     imageSrc, scale = 1,
                     framesMax = 1,
                     offset = {x: 0 , y: 0},
-                    sprites
+                    sprites,
+                    attackBox = {offset: {}, width: undefined, height: undefined}
     }) {
         super({  // super()calls the constructor of the parent
             position,
@@ -76,9 +77,9 @@ class Sprite {
                 x: this.position.x,
                 y: this.position.y
             },
-            offset,
-            width: 100,
-            height: 50
+            offset: attackBox.offset,
+            width: attackBox.width,
+            height: attackBox.height
         }
         this.color = color
         this.isAttacking
@@ -98,8 +99,17 @@ class Sprite {
     update() {
         this.draw()
         this.animateFrames()
+
+        //attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
+        this.attackBox.position.y = this.position.y + this.attackBox.offset.y
+
+        c.fillRect(
+            this.attackBox.position.x,
+            this.attackBox.position.y,
+            this.attackBox.width,
+            this.attackBox.height) //checking area of collision
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y   //equal to the velocity we are passing onto players
 
@@ -114,9 +124,9 @@ class Sprite {
     attack(){
         this.switchSprite('attack1')
         this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100 )
+        // setTimeout(() => {
+        //     this.isAttacking = false
+        // }, 1000 )
     }
 
     switchSprite(sprite) {
