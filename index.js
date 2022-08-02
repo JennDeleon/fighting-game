@@ -80,6 +80,10 @@ const player = new Fighter({
         attack1: {
             imageSrc : 'img/fighter/Attack1.png',
             framesMax: 6,
+        },
+        takeHit: {
+            imageSrc: 'img/fighter/TakeHitwhite.png',
+            framesMax: 4
         }
     },
     attackBox: {
@@ -136,6 +140,10 @@ const enemy = new Fighter({
         attack1: {
             imageSrc: 'img/fighter/by_animations/attack2.png',
             framesMax: 11,
+        },
+        takeHit: {
+            imageSrc: 'img/fighter/by_animations/hit.png',
+            framesMax: 6
         }
     },
     attackBox: {
@@ -228,8 +236,8 @@ function animate() {
             rectangle2: enemy
         }) &&
         player.isAttacking && player.framesCurrent === 4  //hit detection until animation sword hits enemy
-
     ){
+        enemy.takeHit()
         player.isAttacking = false  //stops crazy multi attack, more accurate hits
         enemy.health -= 20  //subtracting from health bar
         document.querySelector('#enemyHealth').style.width = enemy.health + '%' //shrinking health bar with hits

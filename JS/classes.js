@@ -129,10 +129,23 @@ class Sprite {
         // }, 1000 )
     }
 
+    takeHit() {
+        this.sprites.takeHit()
+        this.health -= 20
+    }
+
     switchSprite(sprite) {
+        //overriding all other animations with the attack animation
         if (this.image === this.sprites.attack1.image &&        //if our image is the attack image
             this.framesCurrent < this.sprites.attack1.framesMax - 1) //and our current frame is > the frames max of the actual sprite sheet
         return                                                       //then return and dont call the following code
+
+        //overriding when fighter gets hit
+        if(
+            this.image === this.sprites.takeHit().image &&
+            this.framesCurrent < this.sprites.takeHit().framesMax -1)
+            return;
+
         switch (sprite) {
             case 'idle':
                 if (this.image !== this.sprites.idle.image) {
@@ -169,6 +182,14 @@ class Sprite {
                 if(this.image !== this.sprites.attack1.image) {
                     this.image = this.sprites.attack1.image
                     this.framesMax = this.sprites.attack1.framesMax
+                    this.framesCurrent = 0
+                }
+                break;
+
+            case 'takeHit':
+                if(this.image !== this.sprites.takeHit.image) {
+                    this.image = this.sprites.takeHit.image
+                    this.framesMax = this.sprites.takeHit.framesMax
                     this.framesCurrent = 0
                 }
                 break;
