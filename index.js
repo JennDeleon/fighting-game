@@ -99,35 +99,35 @@ const enemy = new Fighter({
         y:0
     },
     //start of sprite properties
-    imageSrc: 'img/fighter/Idle.png',
-    framesMax: 8,  //Idle image has 8 frames
-    scale: 2.5,   //making fighter bigger
+    imageSrc: 'img/fighter/by_animations/idle2.png',
+    framesMax: 5,  //Idle image has 5 frames
+    scale: 1,   //making fighter bigger
     offset: {
         x: 125,
-        y: 190
+        y: 175
     },
     sprites: {
         idle: {
-            imageSrc: 'img/fighter/Idle.png',
-            framesMax: 8,
+            imageSrc: 'img/fighter/by_animations/idle2.png',
+            framesMax: 5,
         },
         run: {
-            imageSrc: 'img/fighter/Run.png',
-            framesMax: 8,
+            imageSrc: 'img/fighter/by_animations/fly.png',
+            framesMax: 5,
             image: new Image()
         },
         jump: {
-            imageSrc: 'img/fighter/Jump.png',
-            framesMax: 2,   //this image only has 2 frames
+            imageSrc: 'img/fighter/by_animations/fly.png',
+            framesMax: 5,
             image: new Image()
         },
         fall: {
-            imageSrc: 'img/fighter/Fall.png',
-            framesMax: 2,
+            imageSrc: 'img/fighter/by_animations/fly.png',
+            framesMax: 5,
         },
         attack1: {
-            imageSrc: 'img/fighter/Attack1.png',
-            framesMax: 6,
+            imageSrc: 'img/fighter/by_animations/attack2.png',
+            framesMax: 11,
         }
     }
 })
@@ -162,8 +162,8 @@ function animate() {
     c.fillRect(0 ,0, canvas.width, canvas.height);  //gets rid of rect trail
     background.update(); //place before player & enemy bc we want this drawn first, not on top of characters
     shop.update();
-    player.update(); //corrects rect back to starting frame
-    // enemy.update(); //corrects rect back to starting frame
+    player.update(); //corrects rect back to idle frame
+    enemy.update(); //corrects enemy back to idle frame
 
     player.velocity.x = 0
     enemy.velocity.x = 0
@@ -189,9 +189,22 @@ function animate() {
     //enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {  //making sure movement continues even if a different key is lifted up
         enemy.velocity.x = -5
+        enemy.switchSprite('run')
+
     } else if (keys.ArrowRight.pressed && enemy.lastKey=== 'ArrowRight') {
         enemy.velocity.x = 5
+        enemy.switchSprite('run')
+    } else {
+        enemy.switchSprite('idle')
     }
+
+    //jumping
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump')
+    } else if (player.velocity.y > 0) {
+        enemy.switchSprite('fall')
+    }
+
     //detect for collision
     if(
         rectangularCollision({
@@ -255,7 +268,7 @@ window.addEventListener('keydown', (event) => {
             enemy.velocity.y = -20  //controls height of players jump
             break;
         case "ArrowDown":
-            enemy.isAttacking = true
+            enemy.attack()
             break
     }
 })
