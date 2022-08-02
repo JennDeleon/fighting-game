@@ -140,10 +140,10 @@ const enemy = new Fighter({
     },
     attackBox: {
         offset: {
-            x: -35,
-            y: 0
+            x: -250,
+            y: 25
         },
-        width: 100,
+        width: 135,
         height: 50
     }
 })
@@ -234,18 +234,31 @@ function animate() {
         enemy.health -= 20  //subtracting from health bar
         document.querySelector('#enemyHealth').style.width = enemy.health + '%' //shrinking health bar with hits
     }
+
+    //if player misses
+    if (player.isAttacking && player.framesCurrent === 4) {
+        player.isAttacking = false
+    }
+
     // enemy hits
     if(
         rectangularCollision({
             rectangle1: enemy,
             rectangle2: player
         }) &&
-        enemy.isAttacking
+        enemy.isAttacking &&
+        enemy.framesCurrent === 7
     ){
         enemy.isAttacking = false  //stops crazy multi attack, more accurate hits
         player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%' //shrinking health bar with hits
     }
+
+    //if player misses
+    if (enemy.isAttacking && enemy.framesCurrent === 7) {
+        enemy.isAttacking = false
+    }
+
 //    END GAME BASED ON HEALTH
     if (enemy.health <= 0 || player.health <= 0) {
         determineWinner({player, enemy, timerId})

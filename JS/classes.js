@@ -103,12 +103,12 @@ class Sprite {
         //attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y
-
-        c.fillRect(
-            this.attackBox.position.x,
-            this.attackBox.position.y,
-            this.attackBox.width,
-            this.attackBox.height) //checking area of collision
+        //
+        // c.fillRect(                     //inserts rect to see location of collision
+        //     this.attackBox.position.x,
+        //     this.attackBox.position.y,
+        //     this.attackBox.width,
+        //     this.attackBox.height)
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y   //equal to the velocity we are passing onto players
