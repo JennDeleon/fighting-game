@@ -286,23 +286,28 @@ animate();
 
 //adding events to key presses
 window.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        case 'd':
-            keys.d.pressed = true  //when press 'd', player moves 5px right along the x axis
-            player.lastKey = 'd'
-            break;
-        case 'a':
-            keys.a.pressed = true
-            player.lastKey = 'a'
-            break;
-        case 'w':
-            keys.w.pressed = true
-            player.velocity.y = -20  //controls height of players jump
-            break
-        case ' ':
-            player.attack()
-            break
+    if (!player.dead) {
 
+        switch (event.key) {
+            case 'd':
+                keys.d.pressed = true  //when press 'd', player moves 5px right along the x axis
+                player.lastKey = 'd'
+                break;
+            case 'a':
+                keys.a.pressed = true
+                player.lastKey = 'a'
+                break;
+            case 'w':
+                keys.w.pressed = true
+                player.velocity.y = -20  //controls height of players jump
+                break
+            case ' ':
+                player.attack()
+                break
+        }
+    }
+    if (!enemy.dead)
+    switch (event.key){
         case 'ArrowRight':
             keys.ArrowRight.pressed = true
             enemy.lastKey = "ArrowRight"
